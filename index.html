@@ -16,17 +16,18 @@
     <link rel="stylesheet" href="/assets/css/styles.css">
 
     <!-- JS -->
-    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/questions.js" defer></script>
+    <script src="/assets/js/main.js" defer></script>
 
 </head>
 <body>
     <!-- Start Quiz Button -->
-    <div class="start__button">
+    <div id="startButton" class="start__button">
         <button>Start Quiz</button>
     </div>
 
     <!-- Info Box -->
-    <div class="box">
+    <div id="box" class="box">
         
         <div class="box__title">
             <span>Some Rules of this Quiz</span>
@@ -49,7 +50,7 @@
 
     <!-- Quiz Box -->
 
-    <div class="quiz">
+    <div id="quiz" class="quiz">
         <header class="quiz__header">
             <div class="quiz__title">Awesome Quiz Application</div>
             <div class="quiz__timer">
@@ -93,11 +94,26 @@
         <!-- Quiz Box Footer -->
         <footer class="question__score">
             <div class="question__score-total">
-                <span><p>2</p>of<p>5</p>Questions</span>
+                <p class="question__score-text"><span>2</span> of <span>5</span> Questions</p>
             </div>
             <button class="question__next">Next Que</button>
         </footer>
 
+    </div>
+
+    <!-- Result Box -->
+    <div class="result">
+        <div class="result__icon">
+            <i class="result__icon fas fa-crown"></i>
+        </div>
+        <div class="result__text">You've completed the Quiz!</div>
+        <div class="result__score">
+            <p class="result__paragraph">and sorry, You got only <span>2</span> out of <span>5</span></p>
+        </div>
+        <div class="result__buttons">
+            <button class="result__restart">Replay Quiz</button>
+            <button class="result__quit">Quit Quiz</button>
+        </div>
     </div>
 
 </body>
