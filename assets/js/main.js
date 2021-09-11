@@ -1,5 +1,5 @@
 // Getting all required elements
-// Constantes
+// Constant
 const startButton = document.querySelector('#startButton'),
     box = document.querySelector('#box'),
     buttonExit = box.querySelector('.button__exit'),
@@ -42,8 +42,6 @@ questionNext.onclick = () => {
     }else{
         console.log('Questions completed')
     }
-    /* questionCount++;
-    showQuestions(questionCount); */
 }
 
 
@@ -56,34 +54,62 @@ function showQuestions(index) {
     let questionOption = `
     <div class='question__option'>
         <span>${questions[index].options[0]}</span>
-        <div class='question__option-icon question__option-tick'><i class='fas fa-check'></i></div>
     </div>
 
     <div class='question__option'>
         <span>${questions[index].options[1]}</span>
-        <div class='question__option-icon question__option-cross'><i class='fas fa-times'></i></div>
     </div>
 
     <div class='question__option'>
         <span>${questions[index].options[2]}</span>
-        <div class='question__option-icon question__option-cross'><i class='fas fa-times'></i></div>
     </div>
 
     <div class='question__option'>
         <span>${questions[index].options[3]}</span>
-        <div class='question__option-icon question__option-cross'><i class='fas fa-times'></i></div>
     </div>
     `;
     questionText.innerHTML = questionTitle;
     questionList.innerHTML = questionOption;
 
     const option = questionList.querySelectorAll('.question__option');
-    const optionLength = option.length;
+    const optionLength = option.length; 
 
     for (let i = 0; i < optionLength; i++) {
         option[i].setAttribute('onclick', 'optionSelected(this)');
     }
 }
+
+let tickIcon = `<div class="question__option-icon question__option-tick"><i class="fas fa-check"></i></div>`,
+    crossIcon = `<div class="question__option-icon question__option-cross"><i class="fas fa-times"></i></div>`;
+
+function optionSelected(answer) {
+    let userAnswer = answer.textContent.trim();
+    let correctAnswer = questions[questionCount].answer.trim();
+    let allOptions = questionList.children.length;
+    if (userAnswer == correctAnswer) {
+        answer.classList.add('question__option--correct');
+        answer.insertAdjacentHTML('beforeend', tickIcon);
+    }else{
+        answer.classList.add('question__option--incorrect');
+        answer.insertAdjacentHTML('beforeend', crossIcon);
+
+        // If answers is incorrect then automatically selected the correct answer
+        for (let i = 0; i < allOptions; i++) {
+            if (questionList.children[i].textContent.trim() == correctAnswer) {
+                questionList.children[i].setAttribute('class', 'question__option question__option--correct');
+                questionList.children[i].insertAdjacentHTML('beforeend', tickIcon);
+            }
+        }
+    }
+
+    // Once user selected disabled all options
+    for (let i = 0; i < allOptions; i++) {
+        questionList.children[i].classList.add('question__option--disabled');
+    }
+
+
+}
+
 
 function questionsCounter(index) {
     const questionScoreTotal = quiz.querySelector('#questionScoreTotal');
